@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Quiz Geral | LinguApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .question {
+      margin-bottom: 20px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    }
+
+    .options label {
+      display: block;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #5dade2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      background-color: #549fd1;
+    }
+
+    #result {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin-top: 15px;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #ccc;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-buttons">
+    <h1>Quiz Geral de Inglês</h1>
+    <button onclick="voltarInicio()">⬅ Voltar ao Início</button>
+  </div>
+
+  <div class="question" id="quiz-container">
+    <p id="question-text">Carregando pergunta...</p>
+    <div class="options" id="options"></div>
+    <button onclick="proximaPergunta()">Próxima</button>
+    <p id="result"></p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 LinguApp — Todos os direitos reservados.</p>
+    <p>Desenvolvido por Alessia Donadio</p>
+  </footer>
+
+  <script>
+    function voltarInicio() {
+      window.location.href = "index.html"; // ou outro caminho desejado
+    }
+
+    const perguntas = [
+      {
+        texto: "Qual é a tradução de 'apple'?",
+        opcoes: ["Maçã", "Banana", "Uva", "Laranja"],
+        resposta: 0
+      },
+      {
+        texto: "Escolha o pronome correto: ___ is my friend.",
+        opcoes: ["She", "We", "They", "Your"],
+        resposta: 0
+      },
+      {
+        texto: "Complete: I ___ to school every day.",
+        opcoes: ["go", "going", "goes", "gone"],
+        resposta: 0
+      },
+      {
+        texto: "Qual preposição está correta? I'm good ___ English.",
+        opcoes: ["at", "on", "in", "to"],
+        resposta: 0
+      }
+    ];
+
+    let indiceAtual = 0;
+    let pontuacao = 0;
+
+    function mostrarPergunta() {
+      const pergunta = perguntas[indiceAtual];
+      document.getElementById("question-text").textContent = pergunta.texto;
+      const optionsDiv = document.getElementById("options");
+      optionsDiv.innerHTML = "";
+
+      pergunta.opcoes.forEach((opcao, index) => {
+        const label = document.createElement("label");
+        label.innerHTML = `
+          <input type="radio" name="resposta" value="${index}" />
+          ${opcao}
+        `;
+        optionsDiv.appendChild(label);
+      });
+
+      document.getElementById("result").textContent = "";
+    }
+
+    function proximaPergunta() {
+      const opcoes = document.getElementsByName("resposta");
+      let selecionada = -1;
+      opcoes.forEach((opcao) => {
+        if (opcao.checked) selecionada = parseInt(opcao.value);
+      });
+
+      if (selecionada === -1) {
+        alert("Por favor, selecione uma resposta!");
+        return;
+      }
+
+      if (selecionada === perguntas[indiceAtual].resposta) {
+        pontuacao++;
+        document.getElementById("result").textContent = "✔️ Correto!";
+        document.getElementById("result").style.color = "green";
+      } else {
+        document.getElementById("result").textContent = "❌ Errado!";
+        document.getElementById("result").style.color = "red";
+      }
+
+      indiceAtual++;
+      if (indiceAtual < perguntas.length) {
+        setTimeout(mostrarPergunta, 1000);
+      } else {
+        setTimeout(() => {
+          document.getElementById("quiz-container").innerHTML =
+            `<h2>Você acertou ${pontuacao} de ${perguntas.length} perguntas!</h2>
+             <button onclick="location.reload()">🔄 Tentar novamente</button>
+             <button onclick="voltarInicio()" style="margin-left: 10px;">⬅ Voltar ao Início</button>`;
+        }, 1000);
+      }
+    }
+
+    // Inicializar o quiz
+    mostrarPergunta();
+  </script>
+</body>
+</html>

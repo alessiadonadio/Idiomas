@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Exercícios | LinguApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #5dade2;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      flex-grow: 1;
+    }
+
+    .exercise-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .exercise-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 220px;
+      transition: transform 0.3s;
+    }
+
+    .exercise-card:hover {
+      transform: scale(1.05);
+    }
+
+    .exercise-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+      color: #2c3e50;
+    }
+
+    .exercise-card p {
+      font-size: 0.95rem;
+      color: #555;
+    }
+
+    .start-quiz-btn {
+      padding: 10px 20px;
+      background-color: #5dade2;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s;
+    }
+
+    .start-quiz-btn:hover {
+      background-color: #549fd1;
+    }
+
+    footer {
+      background-color: #5dade2;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1><a href="index.html" style="color: white; text-decoration: none;">LinguApp</a></h1>
+    <p>Pratique o que aprendeu com exercícios!</p>
+  </header>
+
+  <button onclick="voltarInicio()" class="start-quiz-btn">Voltar ao Início</button>
+
+  <section class="container" id="conteudo-exercicios">
+    <h2>Exercícios de Inglês</h2>
+    <div class="exercise-list">
+      <div class="exercise-card">
+        <h3>Vocabulário</h3>
+        <p>Associe palavras a imagens ou traduções.</p>
+      </div>
+      <div class="exercise-card">
+        <h3>Tempos Verbais</h3>
+        <p>Complete frases usando o tempo verbal correto.</p>
+      </div>
+      <div class="exercise-card">
+        <h3>Pronomes</h3>
+        <p>Escolha o pronome adequado para cada contexto.</p>
+      </div>
+      <div class="exercise-card">
+        <h3>Preposições</h3>
+        <p>Teste seu conhecimento com exercícios práticos.</p>
+      </div>
+      <div class="exercise-card">
+        <h3>Condicionais</h3>
+        <p>Complete sentenças usando “if” corretamente.</p>
+      </div>
+      <div class="exercise-card">
+        <h3>Compreensão</h3>
+        <p>Leia e responda perguntas simples em inglês.</p>
+      </div>
+    </div>
+    <a href="quiz.html"></a>
+
+    <!-- Botão para redirecionar para um quiz geral -->
+    <button class="start-quiz-btn" onclick="iniciarQuiz()">Iniciar Quiz Geral</button>
+  </section>
+
+ <footer>
+    <p>&copy; 2025 LinguApp — Todos os direitos reservados.</p>
+    <p> Desenvolvido por Alessia Donadio</p>
+  </footer>
+
+</body>
+</html>
+
+  <script>
+    function voltarInicio() {
+      window.location.href = "index.html";
+    }
+
+    function iniciarQuiz() {
+      window.location.href = "quiz.html";
+    }
+  </script>
+</body>
+</html>

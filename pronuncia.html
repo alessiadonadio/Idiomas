@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prática de Pronúncia | LinguApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      padding: 20px;
+      max-width: 700px;
+      margin: auto;
+    }
+
+    h1 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+    }
+
+    .top-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      padding: 10px 20px;
+      background-color: #5dade2;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 1rem;
+      margin-right: 10px;
+    }
+
+    button:hover {
+      background-color: #549fd1;
+    }
+
+    #mensagem {
+      margin-top: 15px;
+      font-weight: bold;
+      color: #2c3e50;
+    }
+
+    footer {
+      margin-top: 40px;
+      padding: 20px;
+      text-align: center;
+      border-top: 1px solid #ccc;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <div class="top-buttons">
+    <h1>Prática de Pronúncia</h1>
+    <button onclick="voltarInicio()">⬅ Voltar ao Início</button>
+  </div>
+
+  <p>Digite uma palavra ou frase em inglês e clique em "Ouvir Pronúncia":</p>
+  <input type="text" id="texto" placeholder="Ex: Hello, how are you?">
+  <button onclick="ouvirPronuncia()">🔊 Ouvir Pronúncia</button>
+
+  <p id="mensagem"></p>
+
+  <footer>
+    <p>&copy; 2025 LinguApp — Todos os direitos reservados.</p>
+    <p>Desenvolvido por Alessia Donadio</p>
+  </footer>
+
+  <script>
+    function voltarInicio() {
+      window.location.href = "index.html";
+    }
+
+    function ouvirPronuncia() {
+      const texto = document.getElementById("texto").value.trim();
+      const mensagem = document.getElementById("mensagem");
+
+      if (!texto) {
+        mensagem.textContent = "Por favor, digite algo para ouvir.";
+        mensagem.style.color = "red";
+        return;
+      }
+
+      if ('speechSynthesis' in window) {
+        const utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'en-US';
+
+        // Use a primeira voz em inglês que encontrar
+        const voices = speechSynthesis.getVoices();
+        const vozIngles = voices.find(v => v.lang.startsWith("en"));
+        if (vozIngles) utterance.voice = vozIngles;
+
+        speechSynthesis.speak(utterance);
+
+        mensagem.textContent = "✅ Tocando a pronúncia...";
+        mensagem.style.color = "green";
+      } else {
+        mensagem.textContent = "❌ Seu navegador não suporta pronúncia por voz.";
+        mensagem.style.color = "red";
+      }
+    }
+
+    // Corrigir carregamento tardio das vozes no Chrome
+    window.speechSynthesis.onvoiceschanged = () => {
+      // dispara carregamento das vozes
+    };
+  </script>
+</body>
+</html>

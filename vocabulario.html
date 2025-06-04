@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vocabulário | LinguApp</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #5dade2;
+      color: white;
+      text-align: center;
+      padding: 20px 0;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+    }
+
+    .container {
+      width: 90%;
+      margin: 0 auto;
+      flex-grow: 1; 
+    }
+
+    .word-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      margin-top: 30px;
+    }
+
+    .word-card {
+      background-color: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      text-align: center;
+      width: 200px;
+      cursor: pointer;
+      transition: transform 0.3s;
+    }
+
+    .word-card:hover {
+      transform: scale(1.05);
+    }
+
+    .word-card span {
+      display: block;
+      font-size: 1.5rem;
+      color: black;
+    }
+
+    .word-card p {
+      margin-top: 10px;
+      color: #555;
+      font-size: 1rem;
+    }
+
+    footer {
+      background-color: #5dade2;
+      color: white;
+      text-align: center;
+      padding: 15px 0;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      left: 0;
+    }
+
+    .start-quiz-btn {
+      padding: 10px 20px;
+      background-color: #5dade2;
+      color: white;
+      font-size: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 30px;
+      transition: background-color 0.3s;
+    }
+
+    .start-quiz-btn:hover {
+      background-color: #5dade2;
+    }
+  </style>
+</head>
+<body>
+    <header>
+  <h1><a href="index.html" style="color: white; text-decoration: none;">LinguApp</a></h1>
+  <p>Aprenda palavras em inglês de forma divertida!</p>
+</header>
+
+  </header>
+<button onclick="voltarInicio()" class="start-quiz-btn">Voltar ao Início</button>
+
+  <section class="container" id="conteudo-vocabulario">
+    <h2>Vocabulário em Inglês</h2>
+    <div class="word-list" id="word-list">
+      
+    </div>
+
+  
+  </section>
+
+ <footer>
+    <p>&copy; 2025 LinguApp — Todos os direitos reservados.</p>
+    <p> Desenvolvido por Alessia Donadio</p>
+  </footer>
+
+
+  <script>
+    // Dados das palavras
+    const palavras = {
+      en: {
+        titulo: "Vocabulário em Inglês",
+        lista: [
+          { palavra: "🍎 Apple", traducao: "Maçã" },
+          { palavra: "🐶 Dog", traducao: "Cachorro" },
+          { palavra: "🚗 Car", traducao: "Carro" },
+          { palavra: "🏠 House", traducao: "Casa" },
+          { palavra: "👋 Hello", traducao: "Olá" },
+          { palavra: "🎒 Backpack", traducao: "Mochila" },
+          { palavra: "🍕 Pizza", traducao: "Pizza" },
+          { palavra: "🌍 World", traducao: "Mundo" },
+          { palavra: "🌞 Sun", traducao: "Sol" },
+          { palavra: "🌧️ Rain", traducao: "Chuva" },
+          { palavra: "📚 Book", traducao: "Livro" },
+          { palavra: "💻 Computer", traducao: "Computador" },
+          { palavra: "🕰️ Clock", traducao: "Relógio" }
+        ]
+      }
+    };
+
+    const conteudo = palavras.en;
+
+    // Atualiza o título da seção
+    document.querySelector("h2").textContent = conteudo.titulo;
+
+    // Adiciona as palavras à lista
+    const wordListContainer = document.getElementById('word-list');
+    conteudo.lista.forEach(item => {
+      const card = document.createElement('div');
+      card.classList.add('word-card');
+      card.innerHTML = `
+        <span>${item.palavra}</span>
+        <p>${item.traducao}</p>
+      `;
+      wordListContainer.appendChild(card);
+    });
+
+    // Função para iniciar o quiz
+    function iniciarQuiz() {
+      // Redireciona para a página do quiz
+      window.location.href = 'quiz.html';
+    }
+    function voltarInicio() {
+  window.location.href = 'index.html';
+}
+
+  </script>
+
+</body>
+</html>
